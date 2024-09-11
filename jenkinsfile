@@ -1,52 +1,20 @@
 pipeline{
 	agent{
-		'Agent-1'
+		label 'AGENT-1'
 	}
 	options{
-	timeout(time:30, Units:'MINUTES')
-	disable concurrent build()
+	timeout(time:30, Unit:'MINUTES')
+	disableConcurrent build()
 	ansicolour('Xterm')
 	}	
-	params{}
 	stages{
-		stage('init'){
+		stage('Init'){
 			steps{
-				sh '''
-				lt -ltr
-				cd 01-vpc/
-				terraform init -reconfigure
-				'''
+				sh """
+			echo this is test
+				"""
 			}
 		}
-		
-		stage('Plan'){
-		when{
-		expression{
-			params.Action=='APPly'
-		}
-		}
-			steps{
-				sh '''
-				cd 01-vpc/
-				terraform plan
-				'''
-				}
-				}
-	   
-	   stage('Deploy'){
-	   when{
-		expression{
-			params.Action=='destroy'
-        }
-        }
-			steps{
-				sh '''
-				cd 01-vpc/
-				terraform destroy -auto-approve
-				'''			
-                }
-    }
-
     post{
 
      always{
@@ -54,15 +22,15 @@ pipeline{
     echo 'I always say hello'
     deleteDir()
 }
-success{
+    success{
 
-    echo 'i will run when pipeline is success'
-}
-failure{
+        echo 'i will run when pipeline is success'
+    }
+    failure{
 
-    echo 'i will run when pipe line is failure'
+        echo 'i will run when pipe line is failure'
+    }
+  }
+ }
 }
-}
-}
-
 
