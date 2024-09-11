@@ -6,12 +6,21 @@ pipeline{
 	timeout(time:30, Unit:'MINUTES')
 	disableConcurrent build()
 	ansicolour('Xterm')
+    pipelineutility('')
 	}	
 	stages{
+        stage('read the version'){
+            steps{
+              def packageJson= readJson file: 'package.json'
+              def appversion=packageJson.version
+            }
+        }
 		stage('Init'){
 			steps{
 				sh """
-			echo this is test
+			npm install
+            ls -ltr
+            echo $appversion
 				"""
 			}
 		}
