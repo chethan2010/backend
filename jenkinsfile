@@ -8,15 +8,15 @@ pipeline{
         ansiColor('xterm')
     }
 	stages{
-        stage('test'){
-            steps{
-                //   def packageJson= readJson file: 'package.json'
-                //   def appversion=packageJson.version
-                    sh '''
-                    ls -ltr
-                    echo "this is testing"
-                    '''
-            }
+        // stage('test'){
+        //     steps{
+        //         //   def packageJson= readJson file: 'package.json'
+        //         //   def appversion=packageJson.version
+        //             sh '''
+        //             ls -ltr
+        //             echo "this is testing"
+        //             '''
+        //     }
         }
 		stage('install'){
 			steps{
