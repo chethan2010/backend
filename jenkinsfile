@@ -2,30 +2,30 @@ pipeline{
 	agent{
 		label 'AGENT-1'
 	}
-	options{
-	timeout(time:30, Unit:'MINUTES')
-	// disableConcurrent build()
-	// ansicolour('Xterm')
-    // pipelineutility('')
-	}	
+	// options{
+	// timeout(time:30, Unit:'MINUTES')
+	// // disableConcurrent build()
+	// // ansicolour('Xterm')
+    // // pipelineutility('')
+	// }	
 	stages{
         stage('read the version'){
             steps{
             //   def packageJson= readJson file: 'package.json'
             //   def appversion=packageJson.version
-                sh """
+                sh '''
                 echo "Reading Version"
-                """
+                '''
             }
         }
 		stage('test'){
 			steps{
-				sh """
+				sh '''
 			// npm install
             // ls -ltr
             // echo $appversion
             echo "testing app"
-				"""
+				'''
 			}
 		}
     //     post{
