@@ -10,24 +10,24 @@ pipeline{
 	stages{
         stage('test'){
             steps{
-            //   def packageJson= readJson file: 'package.json'
-            //   def appversion=packageJson.version
-                sh '''
-                ls -ltr
-                echo "this is testing"
-                '''
+                //   def packageJson= readJson file: 'package.json'
+                //   def appversion=packageJson.version
+                    sh '''
+                    ls -ltr
+                    echo "this is testing"
+                    '''
             }
         }
-		// stage('test'){
-		// 	steps{
-		// 		sh '''
-		// 	// npm install
-        //     // ls -ltr
-        //     // echo $appversion
-        //     // echo "testing app"
-		// 		'''
-		// 	}
-		// }
+		stage('Install dependencies'){
+			steps{
+				sh '''
+                    npm install
+                    // ls -ltr
+                    // echo $appversion
+                    // echo "testing app"
+                        '''
+			}
+		}
        
  }
 
