@@ -8,15 +8,15 @@ pipeline{
         ansiColor('xterm')
     }
     environment{
-     def appversion = ''
+     def appVersion = ''
     }
 	stages{
         stage('read the version'){
             steps{
                 script{
                     def packageJson = readJson file: 'package.json'
-                    appversion = packageJson.version
-                    echo "applicationversion:$appversion"
+                    appVersion = packageJson.version
+                    echo "applicationversion:$appVersion"
                 }
             }
         }
