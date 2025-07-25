@@ -8,24 +8,21 @@ pipeline{
         ansiColor('xterm')
     }
 	stages{
-        // stage('test'){
-        //     steps{
+        stage('test'){
+            steps{
         //         //   def packageJson= readJson file: 'package.json'
         //         //   def appversion=packageJson.version
-        //             sh '''
-        //             ls -ltr
-        //             echo "this is testing"
-        //             '''
-        //     }
-        //}
-		stage('install'){
-			steps{
-				    sh '''
-                    npm install
-                    // ls -ltr
-                    // echo $appversion
-                    // echo "testing app"
+                    sh '''
+                    ls -ltr
+                    echo "this is testing"
                     '''
+            }
+        }
+		stage('installing Dependencies'){
+			steps{
+				    sh """
+                    npm install
+                       """
 			}
 		}
        
