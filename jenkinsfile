@@ -18,14 +18,14 @@ pipeline{
                     '''
             }
         }
-		stage('Install dependencies'){
+		stage('Installdependencies'){
 			steps{
-				sh '''
+				    sh '''
                     npm install
                     // ls -ltr
                     // echo $appversion
                     // echo "testing app"
-                        '''
+                    '''
 			}
 		}
        
