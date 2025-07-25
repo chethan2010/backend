@@ -4,9 +4,9 @@ pipeline{
 	}
 	options{
         timeout(time:30, Unit:'MINUTES')
-        disableConcurrent build()
-        ansicolour('Xterm')
-        pipelineutility('')
+        // disableConcurrent build()
+        // ansicolour('Xterm')
+        // pipelineutility('')
 	}	
 	stages{
         stage(''){
