@@ -31,12 +31,23 @@ pipeline {
                 }
             }
         }
+        stage('Builds'){
+
+                sh"""
+                    zip -r backend-${App_VERSION}.zip */ -x jenkins -x backend-${appversion}.zip
+                    ls -ltr
+                    """
+        }
+
+
+
+
     }
 
     post {
         always {
             echo 'I always say hello'
-            // deleteDir()
+            deleteDir()
         }
         success {
             echo 'I will run when pipeline is success'
