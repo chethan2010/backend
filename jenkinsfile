@@ -17,7 +17,7 @@ pipeline{
         //             echo "this is testing"
         //             '''
         //     }
-        }
+        //}
 		stage('install'){
 			steps{
 				    sh '''
