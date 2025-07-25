@@ -38,7 +38,7 @@ pipeline {
                 script {
                     def zipFile = "backend-${env.APP_VERSION}.zip"
                     sh """
-                        zip -r ${zipFile} */ -x jenkinsfile -x ${zipFile}
+                        zip -q -r ${zipFile} */ -x jenkinsfile -x ${zipFile}
                         ls -ltr
                     """
                 }
