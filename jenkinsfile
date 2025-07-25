@@ -32,12 +32,14 @@ pipeline {
             }
         }
         stage('Builds'){
+            steps{
 
                 sh"""
-                    zip -r backend-${App_VERSION}.zip */ -x jenkins -x backend-${appversion}.zip
+                     zip -r backend-${App_VERSION}.zip */ -x jenkins -x backend-${appversion}.zip
                     ls -ltr
                     """
-        }
+             }
+         }
 
 
 
