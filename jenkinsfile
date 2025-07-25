@@ -9,7 +9,7 @@ pipeline{
         // pipelineutility('')
 	}	
 	stages{
-        stage(''){
+        stage('test'){
             steps{
             //   def packageJson= readJson file: 'package.json'
             //   def appversion=packageJson.version
@@ -19,16 +19,16 @@ pipeline{
                 '''
             }
         }
-		stage('test'){
-			steps{
-				sh '''
-			// npm install
-            // ls -ltr
-            // echo $appversion
-            // echo "testing app"
-				'''
-			}
-		}
+		// stage('test'){
+		// 	steps{
+		// 		sh '''
+		// 	// npm install
+        //     // ls -ltr
+        //     // echo $appversion
+        //     // echo "testing app"
+		// 		'''
+		// 	}
+		// }
        
  }
 
