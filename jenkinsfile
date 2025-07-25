@@ -8,13 +8,16 @@ pipeline {
         ansiColor('xterm')
     }
 
-   
+    environment {
+        NODE_ENV = 'production'
+    }
+
     stages {
         stage('Read the Version') {
             steps {
                 script {
                     def packageJson = readJSON file: 'package.json'
-                    env.APP_VERSION = packageJson.version  // Set as environment variable
+                    env.APP_VERSION = packageJson.version
                     echo "Application version: ${env.APP_VERSION}"
                 }
             }
@@ -22,28 +25,25 @@ pipeline {
 
         stage('Installing Dependencies') {
             steps {
+                sh '''
+                    npm install
+                    ls -ltr
+                    echo "Application version from env: $APP_VERSION"
+                '''
+            }
+        }
+
+        stage('Builds') {
+            steps {
                 script {
+                    def zipFile = "backend-${env.APP_VERSION}.zip"
                     sh """
-                        npm install
+                        zip -r ${zipFile} */ -x jenkinsfile -x ${zipFile}
                         ls -ltr
-                        echo "Application version from env: ${APP_VERSION}"
                     """
                 }
             }
         }
-        stage('Builds'){
-            steps{
-
-                sh"""
-                     zip -r backend-${App_VERSION}.zip */ -x jenkins -x backend-${appversion}.zip
-                    ls -ltr
-                    """
-             }
-         }
-
-
-
-
     }
 
     post {
