@@ -2,19 +2,20 @@ pipeline{
 	agent{
 		label 'AGENT-1'
 	}
-	// options{
-	// timeout(time:30, Unit:'MINUTES')
-	// // disableConcurrent build()
-	// // ansicolour('Xterm')
-    // // pipelineutility('')
-	// }	
+	options{
+        timeout(time:30, Unit:'MINUTES')
+        disableConcurrent build()
+        ansicolour('Xterm')
+        pipelineutility('')
+	}	
 	stages{
-        stage('read the version'){
+        stage(''){
             steps{
             //   def packageJson= readJson file: 'package.json'
             //   def appversion=packageJson.version
                 sh '''
-                echo "Reading Version"
+                ls -ltr
+                echo "this is testing"
                 '''
             }
         }
@@ -24,26 +25,30 @@ pipeline{
 			// npm install
             // ls -ltr
             // echo $appversion
-            echo "testing app"
+            // echo "testing app"
 				'''
 			}
 		}
-    //     post{
-
-    //         always{
-
-    //         echo 'I always say hello'
-    //         deleteDir()
-    //     }
-    //         success{
-
-    //             echo 'i will run when pipeline is success'
-    //         }
-    //         failure{
-
-    //             echo 'i will run when pipe line is failure'
-    //         }
-    // }
+       
  }
+
+     post{
+
+            always{
+
+            echo 'I always say hello'
+            deleteDir()
+        }
+            success{
+
+                echo 'i will run when pipeline is success'
+            }
+            failure{
+
+                echo 'i will run when pipe line is failure'
+            }
+    }
+
+
 }
 
