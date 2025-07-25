@@ -11,35 +11,39 @@ pipeline{
 	stages{
         stage('read the version'){
             steps{
-              def packageJson= readJson file: 'package.json'
-              def appversion=packageJson.version
+            //   def packageJson= readJson file: 'package.json'
+            //   def appversion=packageJson.version
+                sh """
+                echo "Reading Version"
+                """
             }
         }
-		stage('Init'){
+		stage('test'){
 			steps{
 				sh """
-			npm install
-            ls -ltr
-            echo $appversion
+			// npm install
+            // ls -ltr
+            // echo $appversion
+            echo "testing app"
 				"""
 			}
 		}
-    post{
+        post{
 
-     always{
+            always{
 
-    echo 'I always say hello'
-    deleteDir()
-}
-    success{
+            echo 'I always say hello'
+            deleteDir()
+        }
+            success{
 
-        echo 'i will run when pipeline is success'
+                echo 'i will run when pipeline is success'
+            }
+            failure{
+
+                echo 'i will run when pipe line is failure'
+            }
     }
-    failure{
-
-        echo 'i will run when pipe line is failure'
-    }
-  }
  }
 }
 
