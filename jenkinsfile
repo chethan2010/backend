@@ -27,7 +27,7 @@ pipeline {
             }
         }
    
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
                sh """
                 echo "this is Build"
@@ -38,6 +38,17 @@ pipeline {
                """
             }
         }
+
+         stage('Build'){
+             steps{
+                 sh """
+                    zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
+                    ls -ltr
+                                 
+                    """
+             }
+         }
+
            stage('testing') {
             steps {
                sh """
@@ -58,7 +69,7 @@ pipeline {
         post { 
         always { 
             echo 'I will always say Hello again!'
-            // deleteDir()
+             deleteDir()
         }
         success { 
             echo 'I will run when pipeline is success'
@@ -67,17 +78,8 @@ pipeline {
             echo 'I will run when pipeline is failure'
         }
     }  
-        // echo "application version: $appVersion"
-        // 
-        // stage('Build'){
-        //     steps{
-        //         sh """
-        //         // zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
-        //         // ls -ltr
-        //         echo "this is build"
-        //         """
-        //     }
-        // }
+      
+
         // stage('Docker build'){
         //     steps{
         //         sh """
