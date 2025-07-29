@@ -34,9 +34,9 @@ pipeline {
                 
                """
             }
+        }
         // echo "application version: $appVersion"
         // npm install
-        // }
         // stage('Build'){
         //     steps{
         //         sh """
@@ -140,4 +140,4 @@ pipeline {
 //             echo 'I will run when pipeline is failure'
 //         }
 //     }
-// }
+}
