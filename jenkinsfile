@@ -16,34 +16,36 @@ pipeline {
     //     region = "us-east-1"
     //     account_id = "315069654700"
     // }
-    stages {
-        stage('read the version'){
-            steps{
-                script{
-                    def packageJson = readJSON file: 'package.json'
-                    appVersion = packageJson.version
-                    echo "application version: $appVersion"
-                }
-            }
-        }
-        stage('Install Dependencies') {
+    // stages {
+    //     stage('read the version'){
+    //         steps{
+    //             script{
+    //                 def packageJson = readJSON file: 'package.json'
+    //                 appVersion = packageJson.version
+    //                 echo "application version: $appVersion"
+    //             }
+    //         }
+    //     }
+        stage('testing') {
             steps {
                sh """
-                // npm install
+                echo "this is testing"
                 ls -ltr
-                // echo "application version: $appVersion"
+                
                """
             }
-        }
-        stage('Build'){
-            steps{
-                sh """
-                // zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
-                // ls -ltr
-                echo "this is build"
-                """
-            }
-        }
+        // echo "application version: $appVersion"
+        // npm install
+        // }
+        // stage('Build'){
+        //     steps{
+        //         sh """
+        //         // zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
+        //         // ls -ltr
+        //         echo "this is build"
+        //         """
+        //     }
+        // }
         // stage('Docker build'){
         //     steps{
         //         sh """
@@ -56,17 +58,17 @@ pipeline {
         //     }
         // }
 
-        stage('Deploy'){
-            steps{
-                sh """
-                    // aws eks update-kubeconfig --region us-east-1 --name expense-dev
-                    // cd helm
-                    // sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml
-                    // helm upgrade backend .
-                    echo "this is deploy"
-                """
-            }
-        }
+        // stage('Deploy'){
+        //     steps{
+        //         sh """
+        //             // aws eks update-kubeconfig --region us-east-1 --name expense-dev
+        //             // cd helm
+        //             // sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml
+        //             // helm upgrade backend .
+        //             echo "this is deploy"
+        //         """
+        //     }
+        // }
         
         /* stage('Sonar Scan'){
             environment {
@@ -125,17 +127,17 @@ pipeline {
                 }
             }
         } */
-    }
-    post { 
-        always { 
-            echo 'I will always say Hello again!'
-            deleteDir()
-        }
-        success { 
-            echo 'I will run when pipeline is success'
-        }
-        failure { 
-            echo 'I will run when pipeline is failure'
-        }
-    }
-}
+//     }
+//     post { 
+//         always { 
+//             echo 'I will always say Hello again!'
+//             deleteDir()
+//         }
+//         success { 
+//             echo 'I will run when pipeline is success'
+//         }
+//         failure { 
+//             echo 'I will run when pipeline is failure'
+//         }
+//     }
+// }
