@@ -26,11 +26,30 @@ pipeline {
     //             }
     //         }
     //     }
-        stage('testing') {
+    stages{
+        stage('Build') {
+            steps {
+               sh """
+                echo "this is Build"
+             
+                
+               """
+            }
+        }
+           stage('testing') {
             steps {
                sh """
                 echo "this is testing"
-                ls -ltr
+               
+                
+               """
+            }
+        }
+           stage('Deploy') {
+            steps {
+               sh """
+                echo "this is testing"
+            
                 
                """
             }
@@ -140,4 +159,5 @@ pipeline {
 //             echo 'I will run when pipeline is failure'
 //         }
 //     }
+}
 }
