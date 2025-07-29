@@ -64,7 +64,7 @@ pipeline {
             echo 'I will run when pipeline is failure'
         }
     }
-        
+    }  
         // echo "application version: $appVersion"
         // 
         // stage('Build'){
@@ -159,4 +159,3 @@ pipeline {
         } */
 //     }
 } 
-}
