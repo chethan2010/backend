@@ -72,7 +72,7 @@ pipeline {
            stage('Deploy'){
                 when{
                     expression{
-                        params.d eploy
+                        params.deploy
                     }
                 }
                 steps{
@@ -84,13 +84,13 @@ pipeline {
                 }
             }
         } 
-           stage('Deploy') {
-            steps {
-               sh """
-                echo "this is Deploy"
-               """
-                }
-                }
+        //    stage('Deploy') {
+        //     steps {
+        //        sh """
+        //         echo "this is Deploy"
+        //        """
+        //         }
+        //         }
 
     }  
 
