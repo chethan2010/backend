@@ -12,7 +12,7 @@ pipeline {
     // }
          environment{     
            def appVersion = '' //variable declaration
-    //     nexusUrl = 'nexus.daws78s.online:8081'
+           nexusUrl = 'nexus.daws78s.online:8081'
     //     region = "us-east-1"
     //     account_id = "315069654700"
         }
@@ -48,14 +48,42 @@ pipeline {
                     """
              }
          }
-
-           stage('testing') {
-            steps {
-               sh """
-                echo "this is testing"
-                 """
+          stage('Nexus Artifact Upload'){
+            steps{
+                script{
+                    nexusArtifactUploader(
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        nexusUrl: "${nexusUrl}",
+                        groupId: 'com.expense',
+                        version: "${appVersion}",
+                        repository: "backend",
+                        credentialsId: 'nexus-auth',
+                        artifacts: [
+                            [artifactId: "backend" ,
+                            classifier: '',
+                            file: "backend-" + "${appVersion}" + '.zip',
+                            type: 'zip']
+                        ]
+                    )
+                }
             }
-        }
+        } 
+           stage('Deploy'){
+                when{
+                    expression{
+                        params.d eploy
+                    }
+                }
+                steps{
+                    script{
+                        def params = [
+                            string(name: 'appVersion', value: "${appVersion}")
+                        ]
+                        build job: 'backend-deploy', parameters: params, wait: false
+                }
+            }
+        } 
            stage('Deploy') {
             steps {
                sh """
@@ -125,27 +153,7 @@ pipeline {
             }
         } */
 
-        /* stage('Nexus Artifact Upload'){
-            steps{
-                script{
-                    nexusArtifactUploader(
-                        nexusVersion: 'nexus3',
-                        protocol: 'http',
-                        nexusUrl: "${nexusUrl}",
-                        groupId: 'com.expense',
-                        version: "${appVersion}",
-                        repository: "backend",
-                        credentialsId: 'nexus-auth',
-                        artifacts: [
-                            [artifactId: "backend" ,
-                            classifier: '',
-                            file: "backend-" + "${appVersion}" + '.zip',
-                            type: 'zip']
-                        ]
-                    )
-                }
-            }
-        } */
+       
         /* stage('Deploy'){
             when{
                 expression{
